@@ -4,6 +4,14 @@
     padding: 0;
    font-family: "Poppins", sans-serif;
 }
+html{
+    scroll-behavior: smooth;
+   
+}
+
+section{
+    scroll-margin-top: 150px;
+}
 body{
     background: #fff;
     min-width: 250px;
@@ -18,7 +26,7 @@ nav{
     max-width: 100%;
     margin: auto;
     
-    background: #fff;
+    background: #e2e9ff;
 }
 .menu-btn{
     display: none;
@@ -31,7 +39,70 @@ nav{
 .overlay{
     display: none;
 }
+.sigma-drop{
+    position: relative;
+    background: transparent;
+    cursor: pointer;
+    border: none;
+}
+.dropdown-sigma{
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background: #fff;
+    transition: .3s ease all;
+    transform-origin: top right;
+    width: 200px;
+    height: auto;
+    transform: scale(0);
+    box-shadow: 0 0 15px #00000020;
+}
+.sigma-drop:hover .dropdown-sigma{
+    transform: scale(1);
+    
+}
+.buttonbuy {
+    position: relative;
+    margin-top: 20px;
+    border: 1px solid #000;
+    cursor: pointer;
+}
+.buttonbuy:focus .dropdown-sigma{
+    transform: scale(1);
+    z-index: 5;
+    transition: 3s ease all !important;
+}
+.buttonbuy:hover .dropdown-sigma{
+    transform: scale(1);
+    z-index: 5;
+    
+}
 
+.buttonbuy a,
+.buttonbuy button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: #000000;
+    background: #fff;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 15px;
+    transition: .2s ease all;
+    outline: none;
+}
+
+.buttonbuy a:hover {
+
+    color: #000;
+    background: #E3E9FF;
+
+}
+.dropdown-sigma a{
+    border-radius: 0 !important;
+}
 
 
 .nav-segment{
@@ -44,9 +115,10 @@ nav{
 }
 .nav-logo{
     display: flex;
-    color: #000;
+    color: #000000;
     padding:0 10px;
     font-size: 24px;
+    font-family: 'Times New Roman', Times, serif;
     transition: .3s ease all;
     text-decoration: none;
     width: 50%;
@@ -78,10 +150,10 @@ background-color: #ffffff;
     background-image: radial-gradient(circle at center center, #fcfcfc, #ffffff), repeating-radial-gradient(circle at center center, #fcfcfc, #fcfcfc, 40px, transparent 80px, transparent 40px);
     background-blend-mode: multiply;
 }
-.nav-link a{
+.nav-link a {
     display: flex;
-        align-items: center;
-        gap: 10px;
+    align-items: center;
+    gap: 10px;
     color: #000000;
     text-decoration: none;
     font-weight: 600;
@@ -89,8 +161,20 @@ background-color: #ffffff;
     transition: .2s ease all;
     border-radius: 50px;
 }
+
+.about-text-g{
+    padding: 15px;
+    background: linear-gradient(to right, #00000002, #00000002);
+    text-align: center;
+    max-width: 750px;
+   border: 1px solid #ccc;
+    box-shadow: 0 0 15px #00000010;
+    border-radius: 8px;
+    margin: 30px auto;
+    font-size: 18px;
+}
 .nav-link a:hover{
-    background: #e9e9e9;
+    background: #fff;
     
     color: #000;
 }
@@ -788,7 +872,7 @@ background-color: #ffffff;
     padding: 22px 30px;
     color: #000000;
     margin-bottom: 0px;
-    background: #ffffff;
+    background: #E3E9FF;
     cursor: pointer;
     font-size: 18px;
     border: 1px solid #ccc;

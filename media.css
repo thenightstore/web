@@ -47,11 +47,16 @@
     .nav-link-button a{
         margin-left: 0;
     }
-    .nav-link a{
+    .nav-link a ,
+    .nav-link button{
         
         width: 100%;
         text-align: left;
         background: #ffffff;
+    }
+    .dropdown-sigma{
+        left: 0;
+        right: auto;
     }
     .nav-logo-m{
         width: 100%;
