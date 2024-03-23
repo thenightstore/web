@@ -12,12 +12,13 @@ nav{
     position: sticky;
     top: 0;
     z-index: 999;
+    
 }
 .nav-container{
     max-width: 100%;
     margin: auto;
     
-    background: #000;
+    background: #fff;
 }
 .menu-btn{
     display: none;
@@ -31,6 +32,8 @@ nav{
     display: none;
 }
 
+
+
 .nav-segment{
     display: flex;
     align-items: center;
@@ -40,8 +43,13 @@ nav{
     padding: 20px 0;
 }
 .nav-logo{
-    
+    display: flex;
+    color: #000;
+    padding:0 10px;
+    font-size: 24px;
     transition: .3s ease all;
+    text-decoration: none;
+    width: 50%;
 }
 .nav-logo img{
     border-radius: 50px;
@@ -65,21 +73,24 @@ nav{
 .home-div-bg-ef{
     padding-top: 100px;
     padding-bottom: 100px;
-   
+background-color: #ffffff;
+    opacity: 1;
+    background-image: radial-gradient(circle at center center, #fcfcfc, #ffffff), repeating-radial-gradient(circle at center center, #fcfcfc, #fcfcfc, 40px, transparent 80px, transparent 40px);
+    background-blend-mode: multiply;
 }
 .nav-link a{
     display: flex;
         align-items: center;
         gap: 10px;
-    color: #ffffff;
+    color: #000000;
     text-decoration: none;
     font-weight: 600;
     padding:15px;
     transition: .2s ease all;
-   
+    border-radius: 50px;
 }
 .nav-link a:hover{
-    background: #F8F8F8;
+    background: #e9e9e9;
     
     color: #000;
 }
@@ -265,6 +276,25 @@ nav{
 .primary-btn-st i {
     margin-left: 10px;
 }
+.s-card-btn-buy{
+    background: #fff;
+    color: #000;
+    font-weight: 800;
+    text-decoration: none;
+    padding: 14px;
+    border-radius: 3px;
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    border: 1px solid #000;
+    transition: .3s ease all;
+}
+.s-card-btn-buy:hover{
+    background: #000;
+    color: #fff;
+    border: 1px solid #fff;
+}
+
 .primary-btn{
     position: absolute;
     right:50px;
@@ -313,8 +343,8 @@ nav{
     background: #fff;
     width: 31%;
     padding: 10px;
-    border-radius: 4px;
-    box-shadow: 0 0 15px #00000020;
+    border-radius: 3px;
+    box-shadow: 0 0 15px #00000010;
     text-decoration: none;
     color: #242422;
     transition: .3s ease all;
@@ -395,11 +425,15 @@ nav{
 }
 .box-f{
     background: #fff;
-    width: 23%;
+    width: 25%;
     padding: 20px;
     box-shadow: 0 0 15px #00000010;
     border-radius: 4px;
    
+}
+.box-f-p{
+    height: 200px;
+    overflow: auto;
 }
 .box-f-title{
     display: flex;
@@ -417,6 +451,8 @@ nav{
 }
 .s-card-c{
     display: flex;
+    height: 130px;
+    overflow: auto;
 }
 .s-card-c i{
     margin-right: 7px;
@@ -619,8 +655,8 @@ nav{
     gap: 20px;
 }
 .footer-container-width{
-    background: #272F35;
-    border-radius: 15px;
+    background: #fff;
+    border: 2px solid #000;
 }
 .footer-container{
     display: flex;
@@ -630,8 +666,8 @@ nav{
 .footer-links-container{
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    font-size: 13px;
+    justify-content: center;
+    font-size: 16px;
     padding: 30px 0;
     width: 80%;
     margin: auto;
@@ -730,4 +766,80 @@ nav{
     font-size: 18px;
     font-weight: 800;
     padding: 10px 0;
+}
+
+
+.questions-header {
+    padding: 50px;
+    font-size: 48px;
+    text-align: center;
+}
+
+.asked-questions-container {
+    max-width: 1100px;
+    margin: auto;
+}
+
+.faq-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 30px;
+    color: #000000;
+    margin-bottom: 0px;
+    background: #ffffff;
+    cursor: pointer;
+    font-size: 18px;
+    border: 1px solid #ccc;
+}
+
+.faq-header:after {
+    position: absolute;
+    right: 30px;
+    content: '\2b';
+    color: #000;
+    font-size: 28px;
+
+}
+
+.faq-active .faq-header:after {
+
+    rotate: 45deg;
+}
+
+.accordion-item {
+    margin-bottom: 8px;
+    position: relative;
+}
+
+.paragraph {
+    max-height: 0px;
+    height: 0%;
+    overflow: hidden;
+    background: #fff;
+    transition: 1s all;
+    color: #000;
+    font-size: 18px;
+    border: 1px solid #ccc;
+    border-top: 0px solid #ccc;
+}
+
+.accordion-item .paragraph {
+    transition: 0.3s all;
+}
+
+.faq-active .paragraph {
+    height: 100%;
+    max-height: 500px;
+}
+
+.accordion-menu {
+    max-width: 800px;
+    margin: auto;
+
+}
+
+.paragraph-content {
+    padding: 22px;
 }
