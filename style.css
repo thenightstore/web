@@ -490,6 +490,9 @@ background-color: #ffffff;
     flex-wrap: wrap;
     margin-top: 70px;
 }
+.accordion-item .container{
+    padding: 0 !important;
+}
 .relative{
     position: relative;
 }
