@@ -916,7 +916,9 @@ background-color: #ffffff;
     border: 1px solid #ccc;
     border-top: 0px solid #ccc;
 }
-
+li{
+    list-style-type: none;
+}
 .accordion-item .paragraph {
     transition: 0.3s all;
 }
