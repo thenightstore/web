@@ -117,7 +117,7 @@
     }
    .home-container{
     justify-content: center;
-    flex-direction: column;
+    flex-direction: column-reverse;
     gap: 50px;
    }
    .home-container div{
@@ -274,7 +274,7 @@
         display: none;
     }
     .home-img img{
-        width: 100%;
+        width: 180px;
     }
 }
 @media screen and (max-width:455px) {
