@@ -905,7 +905,7 @@ background-color: #ffffff;
 .paragraph {
     max-height: 0px;
     height: 0%;
-    overflow: hidden;
+    overflow: auto;
     background: #fff;
     transition: 1s all;
     color: #000;
