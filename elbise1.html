@@ -22,6 +22,10 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="script.js"></script>
     <link rel="manifest" href="/manifest.json">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
@@ -99,10 +103,16 @@
                 <input type="tel" id="phone" name="telefon" pattern="[0-9]{10}" required placeholder="Telefon Numarası"><br>
                 <small>(örn. 5551234567)</small><br><br>
 
-                <div id="datepicker-container">
-                    <button id="datepicker-toggle" class="s-card-btn-buy">Tarih Seçin</button>
-                    <input required type="date" id="date" name="date">
-                </div>
+                
+                    <input required type="text" id="start-date" name="start-date" placeholder="Başlangıç Tarihi" autocomplete="none">
+                    <br><br>
+                    <input required type="text" id="end-date" name="end-date" placeholder="Bitiş Tarihi" autocomplete="none">
+                    <br>
+                    <div id="date-difference"></div>
+                    <br>
+                    <div id="total-amount"></div>
+                
+                
 
                 <textarea id="address" name="urun1" rows="4" cols="50" required placeholder="Adres"></textarea><br>
     
@@ -200,40 +210,82 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 <script src="script.js"></script>
 <script>
-    // JavaScript kodu
-    document.addEventListener('DOMContentLoaded', function () {
-        var datePickerToggle = document.getElementById('datepicker-toggle');
-        var datePicker = document.getElementById('date');
+    
+        $(document).ready(function () {
+            // Türkçe dil ayarları
+            $.datepicker.regional['tr'] = {
+                closeText: 'Kapat',
+                prevText: '&#x3C;Önceki',
+                nextText: 'Sonraki&#x3E;',
+                currentText: 'Bugün',
+                monthNames: ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran',
+                    'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'],
+                monthNamesShort: ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz',
+                    'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'],
+                dayNames: ['Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi'],
+                dayNamesShort: ['Pz', 'Pt', 'Sa', 'Ça', 'Pe', 'Cu', 'Ct'],
+                dayNamesMin: ['Pz', 'Pt', 'Sa', 'Ça', 'Pe', 'Cu', 'Ct'],
+                weekHeader: 'Hf',
+                dateFormat: 'dd/mm/yy',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: ''
+            };
 
-        datePickerToggle.addEventListener('click', function () {
-            datePicker.style.display = 'block';
-            datePicker.focus();
-        });
+            $.datepicker.setDefaults($.datepicker.regional['tr']);
 
-        datePicker.addEventListener('change', function () {
-            var selectedDate = new Date(datePicker.value);
-            var today = new Date();
-            var nextWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7);
+            // Başlangıç tarih seçicisini etkinleştir
+            $("#start-date").datepicker({
+                dateFormat: 'dd/mm/yy', // Tarih formatı
+                minDate: 0, // Bugünden önceki tarihleri engelle
+                beforeShowDay: function (date) {
+                    var day = date.getDay();
+                    return [(day != 0), '']; // Pazar günlerini devre dışı bırak
+                },
+                onSelect: function (selectedDate) {
+                    var minEndDate = $(this).datepicker("getDate"); // Başlangıç tarihini al
+                    minEndDate.setDate(minEndDate.getDate() + 1); // Başlangıç tarihinden 1 gün sonrasını minDate olarak ayarla
+                    $("#end-date").datepicker("option", "minDate", minEndDate); // Bitiş tarih seçicisinin minDate'ini güncelle
+                    $("#end-date").fadeIn();
+                    updateDateDifference();
+                }
+            });
 
-            // Belirlenen tarih aralığı içinde mi kontrol et
-            if (selectedDate < today || selectedDate > nextWeek) {
-                alert("Lütfen önümüzdeki bir hafta içinden bir tarih seçin!");
-                datePicker.value = ''; // Seçilen tarihi temizle
-                return;
+            // Bitiş tarih seçicisini etkinleştir
+            $("#end-date").datepicker({
+                dateFormat: 'dd/mm/yy', // Tarih formatı
+                minDate: 0, // Bugünden önceki tarihleri engelle
+                beforeShowDay: function (date) {
+                    var day = date.getDay();
+                    return [(day != 0), '']; // Pazar günlerini devre dışı bırak
+                },
+                onSelect: function (selectedDate) {
+                    updateDateDifference();
+                }
+            });
+
+            // Tarih aralığındaki gün sayısını ve ücreti güncelle
+            function updateDateDifference() {
+                var startDate = $("#start-date").datepicker("getDate");
+                var endDate = $("#end-date").datepicker("getDate");
+
+                if (startDate && endDate && startDate <= endDate) { // Başlangıç tarihi bitiş tarihinden önce veya aynı günse
+                    var difference = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
+                    var dailyRate = 500; // Günlük ücret 500 TL
+                    var totalAmount = difference * dailyRate;
+                    $("#date-difference").text("Kiralanan Gün Sayısı: " + difference + " gün");
+                    $("#total-amount").text("Toplam Ücret: " + totalAmount + " TL");
+                } else {
+                    $("#date-difference").text("");
+                    $("#total-amount").text("");
+                }
             }
 
-            // Tarih aralığını metin olarak ayarla
-            var startDate = today.toLocaleDateString('tr-TR');
-            var endDate = nextWeek.toLocaleDateString('tr-TR');
-            var selectedStartDate = selectedDate.toLocaleDateString('tr-TR');
-            datePickerToggle.textContent = `${selectedStartDate} ile ${endDate} arası seçildi`;
-            datePicker.style.display = 'none';
-
-            // Seçilen tarih aralığını input değeri olarak ayarla
-            var formattedStartDate = selectedDate.getFullYear() + '-' + (selectedDate.getMonth() + 1) + '-' + selectedDate.getDate();
-            datePickerToggle.setAttribute('value', formattedStartDate);
+            // Bitiş tarih seçicisini gizle
+            $("#end-date").hide();
         });
-    });
+
 </script>
 <script>
     document.getElementById("contactForm").addEventListener("submit",()=> {

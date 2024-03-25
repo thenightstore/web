@@ -372,6 +372,9 @@ background-color: #ffffff;
     margin-left: 10px;
 }
 .s-card-btn-buy{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: #fff;
     color: #000;
     font-weight: 800;
@@ -383,6 +386,13 @@ background-color: #ffffff;
     margin-top: 10px;
     border: 1px solid #000;
     transition: .3s ease all;
+}
+.s-card-btn-buy a{
+    width: 100%;
+    color: #000;
+}
+.s-card-btn-buy a:hover{
+    color: #fff;
 }
 .s-card-btn-buy:hover{
     background: #000;
