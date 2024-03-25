@@ -82,6 +82,11 @@
     <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
     <div class="form-pop">
         <div class="form-pop-container">
+            <div class="xmark-container">
+                <div class="xmark">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+            </div>
             <h4 style="margin-bottom: 10px;">Sipariş Bilgileri</h4>
             <form id="contactForm" action="https://formspree.io/f/meqylyol" method="POST" target="dummyframe">
                 
@@ -250,6 +255,7 @@
         const kirala = document.querySelector(".kirala")
         const formpop = document.querySelector(".form-pop")
         const formpopc = document.querySelector(".form-pop-container")
+        const xmark = document.querySelector(".xmark")
 
         kirala.addEventListener("click", () => {
             formpop.style.display = "flex"
@@ -259,6 +265,11 @@
             if (e.target === formpop) {
                formpop.style.display = "none" 
             }
+        })
+        xmark.addEventListener("click",(e)=>{
+            
+               formpop.style.display = "none" 
+            
         })
 
         

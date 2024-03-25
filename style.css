@@ -236,8 +236,14 @@ background-color: #ffffff;
 .home-img, .home-img img{
     width: 230px;
 }
-.home-img img{
-   border: 1px solid #ccc;
+.xmark-container{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    font-size: 22px;
+}
+.xmark{
+    cursor: pointer;
 }
 .search-category-container{
     position: absolute;
