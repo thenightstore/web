@@ -78,7 +78,27 @@
     
         <div class="overlay"></div>
     </nav>
+    <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
+    <div class="form-pop">
+        <div class="form-pop-container">
+            <h4 style="margin-bottom: 10px;">Sipariş Bilgileri</h4>
+            <form id="contactForm" action="https://formspree.io/f/meqylyol" method="POST" target="dummyframe">
+                
+                <input type="text" id="fname" name="isim" required placeholder="İsim"><br><br>
     
+           
+                <input type="text" id="lname" name="soyisim" required placeholder="Soyisim"><br><br>
+    
+                
+                <input type="tel" id="phone" name="telefon" pattern="[0-9]{10}" required placeholder="Telefon Numarası"><br>
+                <small>(örn. 5551234567)</small><br><br>
+
+                <textarea id="address" name="urun1" rows="4" cols="50" required placeholder="Adres"></textarea><br>
+    
+                <button type="submit" class="s-card-btn-buy">KİRALA</button>
+            </form>
+        </div>
+    </div>
     
    
 
@@ -103,11 +123,10 @@
                    
                     <div class="description">
                         <p>
-                            ürün açıklama yazısı ürün açıklama yazısıürün açıklama yazısı
-                            ürün açıklama yazısıürün açıklama 
+                            ürün açıklama yazısı
                         </p>
                     </div>
-                    <button class="buttonbuy" >
+                    <button class="buttonbuy " >
                         <a>Fiyatlandırmalar</a>
                         <div class="dropdown-sigma" >
                             <a  target="_blank"> <span>4 Gün 500
@@ -118,15 +137,44 @@
                                     TL</span></a>
                         </div>
                     </button>
+
+                    <button  class="buttonbuy kirala"><a style="background: #000; color: #fff;"><i class="fa-solid fa-bag-shopping"></i> Hemen Al</a></button>
                     
                     <div class="description">
                         <h3>Nasıl Kiralarım</h3>
                         <p>
-                            iban adresine ücreti yatırdıktan sonra instagram dm yoluyla bize dekontuyla beraber
-                            almak istediğiniz ürünün ekran görüntüsünü yollayabilirsiniz
+                            Ürünü kiralamak için öncelikle web sitemiz üzerinden seçtiğiniz ürünü hemen al butonuna basarak işlemleri başlatabilirsiniz.
+                            <br><br>
+                            Daha sonra ödeme adımında tercih ettiğiniz ödeme yöntemini seçip ücretinizi ödedikten sonra kiralama işlemi tamamlanır
+                            ve ürün size gönderilir.
+                            <br><br>
+                            Ürün ödemesi tamamladıktan sonra dekontu paylaşmış olduğumuz telefon numarasına atmanız bizim
+                            için yeterli olacaktır.<br><br>
+
+                            <div class="s-card-btn-buy">
+                                <span style="font-weight: 800;">0530 702 09 32</span>
+                            </div>
                     
                         </p>
                         
+                    </div>
+                    
+                    <div class="description">
+                        <h3>Ödeme Yöntemleri</h3>
+                        <p>
+                        <button class="buttonbuy ">
+                            <a>Sosyal Medya</a>
+                            <div class="dropdown-sigma">
+                                <a href="https://www.instagram.com/_thenightstore" target="_blank"> <span>Instagram
+                                        </span></a>
+                                <a href="https://www.instagram.com/_thenightstore" target="_blank"> <span>Facebook
+                                        </span></a>
+                                <a href="https://www.instagram.com/_thenightstore" target="_blank"> <span>Mail
+                                        </span></a>
+                            </div>
+                        </button>
+                    
+                        </p>
                     </div>
                     <div class="description">
                         <h3>IBAN BİLGİSİ</h3>
@@ -137,6 +185,7 @@
                     
                         </p>
                     </div>
+                    
                 </div>
             </div>
             
@@ -168,6 +217,38 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 <script src="script.js"></script>
 <script>
+    document.getElementById("contactForm").addEventListener("submit",()=> {
+            
+            // Form gönderildiğinde teşekkür mesajı göster
+            setTimeout(() => {
+                alert("Siparişiniz için teşekkür ederiz. Adres bilgileriniz bize ulaştı.");
+
+                // Form alanlarını temizle
+                document.getElementById("contactForm").reset();
+
+                // Örnek olarak bir öğeyi gizle
+                formpop.style.display = "none"
+            }, 500);
+        });
+</script>
+
+<script>
+        const kirala = document.querySelector(".kirala")
+        const formpop = document.querySelector(".form-pop")
+        const formpopc = document.querySelector(".form-pop-container")
+
+        kirala.addEventListener("click", () => {
+            formpop.style.display = "flex"
+        })
+        
+        window.addEventListener("click",(e)=>{
+            if (e.target === formpop) {
+               formpop.style.display = "none" 
+            }
+        })
+
+        
+        
     const activeImage = document.querySelector(".product-image .active");
         const productImages = document.querySelectorAll(".image-list img");
         const navItem = document.querySelector('a.toggle-nav');

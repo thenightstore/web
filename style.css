@@ -1617,10 +1617,39 @@ img {
     color: #d5d5d5;
 }
 
-.description {
-    border-top: 0.0625rem solid #e3dddd;
-    margin: 2rem 0;
-    padding: 1rem 0 0 0;
+.form-pop{
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background: #00000050;
+    backdrop-filter: blur(10px);
+    z-index: 9999;
+}
+.form-pop-container{
+    
+    padding: 20px;
+    background: #fff;
+    
+    box-shadow: 0 0 10px #00000020;
+}
+
+.form-pop-container input, .form-pop-container textarea{
+    padding: 8px;
+    width: 100%;
+    border-radius: 3px;
+    outline: none;
+    border: 1px solid #242424;
+    background: #ffffff;
+    resize: none;
+}
+
+.form-pop-container button{
+    cursor: pointer;
 }
 
 .add-to-cart {
