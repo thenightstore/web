@@ -51,6 +51,7 @@
                         <a href="index.html#s-s-s"><i class="fa-solid fa-circle-question"></i> <span>Sıkça Sorulan Sorular</span></a>
                         <a href="satilik-urunlerimiz.html"><i class="fa-solid fa-tags"></i> <span>Satılık Ürünlerimiz</span></a>
                         <a href="satilik-urunlerimiz.html#aksesuarlar"><i class="fa-solid fa-tags"></i> <span>Aksesuarlar</span></a>
+                        <a href="odeme-yontemleri.html"><i class="fa-solid fa-wallet"></i> <span>Ödeme Yöntemleri</span></a>
                         <a href="hakkimizda.html"><i class="fa-solid fa-users"></i> <span>Hakkımızda</span></a>
     
                         <button class="sigma-drop">
@@ -92,6 +93,11 @@
                 
                 <input type="tel" id="phone" name="telefon" pattern="[0-9]{10}" required placeholder="Telefon Numarası"><br>
                 <small>(örn. 5551234567)</small><br><br>
+
+                <div id="datepicker-container">
+                    <button id="datepicker-toggle" class="s-card-btn-buy">Tarih Seçin</button>
+                    <input type="date" id="date" name="date">
+                </div>
 
                 <textarea id="address" name="urun1" rows="4" cols="50" required placeholder="Adres"></textarea><br>
     
@@ -151,40 +157,13 @@
                             Ürün ödemesi tamamladıktan sonra dekontu paylaşmış olduğumuz telefon numarasına atmanız bizim
                             için yeterli olacaktır.<br><br>
 
-                            <div class="s-card-btn-buy">
-                                <span style="font-weight: 800;">0530 702 09 32</span>
-                            </div>
+                            
                     
                         </p>
                         
                     </div>
                     
-                    <div class="description">
-                        <h3>Ödeme Yöntemleri</h3>
-                        <p>
-                        <button class="buttonbuy ">
-                            <a>Sosyal Medya</a>
-                            <div class="dropdown-sigma">
-                                <a href="https://www.instagram.com/_thenightstore" target="_blank"> <span>Instagram
-                                        </span></a>
-                                <a href="https://www.instagram.com/_thenightstore" target="_blank"> <span>Facebook
-                                        </span></a>
-                                <a href="https://www.instagram.com/_thenightstore" target="_blank"> <span>Mail
-                                        </span></a>
-                            </div>
-                        </button>
                     
-                        </p>
-                    </div>
-                    <div class="description">
-                        <h3>IBAN BİLGİSİ</h3>
-                        <p>
-                            <span style="font-weight: 800;">TR020006701000000046014728</span><br><br>
-                            Duygu Albayrak<br><br>
-                            Yapıkredi<br><br>
-                    
-                        </p>
-                    </div>
                     
                 </div>
             </div>
@@ -206,7 +185,6 @@
                         © 2024 thenightstore.net<br> Tüm Hakları Saklıdır.
                        </div>
                         
-                      
                     </div>
                 </div>
             </div>
@@ -216,6 +194,42 @@
     
 <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 <script src="script.js"></script>
+<script>
+    // JavaScript kodu
+    document.addEventListener('DOMContentLoaded', function () {
+        var datePickerToggle = document.getElementById('datepicker-toggle');
+        var datePicker = document.getElementById('date');
+
+        datePickerToggle.addEventListener('click', function () {
+            datePicker.style.display = 'block';
+            datePicker.focus();
+        });
+
+        datePicker.addEventListener('change', function () {
+            var selectedDate = new Date(datePicker.value);
+            var today = new Date();
+            var nextWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7);
+
+            // Belirlenen tarih aralığı içinde mi kontrol et
+            if (selectedDate < today || selectedDate > nextWeek) {
+                alert("Lütfen önümüzdeki bir hafta içinden bir tarih seçin!");
+                datePicker.value = ''; // Seçilen tarihi temizle
+                return;
+            }
+
+            // Tarih aralığını metin olarak ayarla
+            var startDate = today.toLocaleDateString('tr-TR');
+            var endDate = nextWeek.toLocaleDateString('tr-TR');
+            var selectedStartDate = selectedDate.toLocaleDateString('tr-TR');
+            datePickerToggle.textContent = `${selectedStartDate} ile ${endDate} arası seçildi`;
+            datePicker.style.display = 'none';
+
+            // Seçilen tarih aralığını input değeri olarak ayarla
+            var formattedStartDate = selectedDate.getFullYear() + '-' + (selectedDate.getMonth() + 1) + '-' + selectedDate.getDate();
+            datePickerToggle.setAttribute('value', formattedStartDate);
+        });
+    });
+</script>
 <script>
     document.getElementById("contactForm").addEventListener("submit",()=> {
             

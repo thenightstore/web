@@ -1616,6 +1616,24 @@ img {
     padding: 0 0.5rem;
     color: #d5d5d5;
 }
+ #datepicker-container {
+     display: inline-block;
+ }
+
+ #datepicker {
+     display: block;
+     padding: 10px;
+     font-size: 16px;
+ }
+ #datepicker-container2 {
+     display: inline-block;
+ }
+
+ #datepicker2 {
+     display: none;
+     padding: 10px;
+     font-size: 16px;
+ }
 
 .form-pop{
     position: fixed;
