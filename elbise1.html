@@ -85,7 +85,7 @@
         <div class="overlay"></div>
     </nav>
     <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
-    <div class="form-pop">
+    <div class="form-pop" style="display: block;">
         <div class="form-pop-container">
             <div class="xmark-container">
                 <div class="xmark">
@@ -207,96 +207,92 @@
         </div>
     </section>
 
-    
-<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
-<script src="script.js"></script>
+    <script>
 
-<script>
-    
-   $(document).ready(function () {
-        // Türkçe dil ayarları
-        $.datepicker.regional['tr'] = {
-            closeText: 'Kapat',
-            prevText: '&#x3C;Önceki',
-            nextText: 'Sonraki&#x3E;',
-            currentText: 'Bugün',
-            monthNames: ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran',
-                'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'],
-            monthNamesShort: ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz',
-                'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'],
-            dayNames: ['Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi'],
-            dayNamesShort: ['Pz', 'Pt', 'Sa', 'Ça', 'Pe', 'Cu', 'Ct'],
-            dayNamesMin: ['Pz', 'Pt', 'Sa', 'Ça', 'Pe', 'Cu', 'Ct'],
-            weekHeader: 'Hf',
-            dateFormat: 'dd/mm/yy',
-            firstDay: 1,
-            isRTL: false,
-            showMonthAfterYear: false,
-            yearSuffix: ''
-        };
+        $(document).ready(function () {
+            // Türkçe dil ayarları
+            $.datepicker.regional['tr'] = {
+                closeText: 'Kapat',
+                prevText: '&#x3C;Önceki',
+                nextText: 'Sonraki&#x3E;',
+                currentText: 'Bugün',
+                monthNames: ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran',
+                    'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'],
+                monthNamesShort: ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz',
+                    'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'],
+                dayNames: ['Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi'],
+                dayNamesShort: ['Pz', 'Pt', 'Sa', 'Ça', 'Pe', 'Cu', 'Ct'],
+                dayNamesMin: ['Pz', 'Pt', 'Sa', 'Ça', 'Pe', 'Cu', 'Ct'],
+                weekHeader: 'Hf',
+                dateFormat: 'dd/mm/yy',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: ''
+            };
 
-        $.datepicker.setDefaults($.datepicker.regional['tr']);
+            $.datepicker.setDefaults($.datepicker.regional['tr']);
 
-        // Başlangıç tarih seçicisini etkinleştir
-        $("#start-date").datepicker({
-            dateFormat: 'dd/mm/yy', // Tarih formatı
-            minDate: 0, // Bugünden önceki tarihleri engelle
-            beforeShowDay: function (date) {
-                var day = date.getDay();
-                return [(day != 0), '']; // Pazar günlerini devre dışı bırak
-            },
-            onSelect: function (selectedDate) {
-                var minEndDate = $(this).datepicker("getDate"); // Başlangıç tarihini al
-                minEndDate.setDate(minEndDate.getDate() + 1); // Başlangıç tarihinden 1 gün sonrasını minDate olarak ayarla
-                $("#end-date").datepicker("option", "minDate", minEndDate); // Bitiş tarih seçicisinin minDate'ini güncelle
-                $("#end-date").fadeIn();
-                updateDateDifference();
-            }
-        });
-
-        // Bitiş tarih seçicisini etkinleştir
-        $("#end-date").datepicker({
-            dateFormat: 'dd/mm/yy', // Tarih formatı
-            minDate: 0, // Bugünden önceki tarihleri engelle
-            beforeShowDay: function (date) {
-                var day = date.getDay();
-                return [(day != 0), '']; // Pazar günlerini devre dışı bırak
-            },
-            onSelect: function (selectedDate) {
-                updateDateDifference();
-            }
-        });
-
-        // Tarih aralığındaki gün sayısını ve ücreti güncelle
-        function updateDateDifference() {
-            var startDate = $("#start-date").datepicker("getDate");
-            var endDate = $("#end-date").datepicker("getDate");
-
-            if (startDate && endDate && startDate <= endDate) { // Başlangıç tarihi bitiş tarihinden önce veya aynı günse
-                var difference = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
-                var dailyRate = 100; // Günlük ücret 100 TL
-
-                var totalAmount = 0;
-                if (difference <= 4) {
-                    totalAmount = 500; // İlk dört gün için ücret 500 TL
-                } else {
-                    totalAmount = 500 + (difference - 4) * dailyRate; // Diğer günler için ek ücretler
+            // Başlangıç tarih seçicisini etkinleştir
+            $("#start-date").datepicker({
+                dateFormat: 'dd/mm/yy', // Tarih formatı
+                minDate: 0, // Bugünden önceki tarihleri engelle
+                beforeShowDay: function (date) {
+                    var day = date.getDay();
+                    return [(day != 0), '']; // Pazar günlerini devre dışı bırak
+                },
+                onSelect: function (selectedDate) {
+                    var minEndDate = $(this).datepicker("getDate"); // Başlangıç tarihini al
+                    minEndDate.setDate(minEndDate.getDate() + 1); // Başlangıç tarihinden 1 gün sonrasını minDate olarak ayarla
+                    $("#end-date").datepicker("option", "minDate", minEndDate); // Bitiş tarih seçicisinin minDate'ini güncelle
+                    $("#end-date").fadeIn();
+                    updateDateDifference();
                 }
+            });
 
-                $("#date-difference").text("Kiralanan Gün Sayısı: " + difference + " gün");
-                $("#total-amount").text("Toplam Ücret: " + totalAmount + " TL");
-            } else {
-                $("#date-difference").text("");
-                $("#total-amount").text("");
+            // Bitiş tarih seçicisini etkinleştir
+            $("#end-date").datepicker({
+                dateFormat: 'dd/mm/yy', // Tarih formatı
+                minDate: 0, // Bugünden önceki tarihleri engelle
+                beforeShowDay: function (date) {
+                    var day = date.getDay();
+                    return [(day != 0), '']; // Pazar günlerini devre dışı bırak
+                },
+                onSelect: function (selectedDate) {
+                    updateDateDifference();
+                }
+            });
+
+            // Tarih aralığındaki gün sayısını ve ücreti güncelle
+            function updateDateDifference() {
+                var startDate = $("#start-date").datepicker("getDate");
+                var endDate = $("#end-date").datepicker("getDate");
+
+                if (startDate && endDate && startDate <= endDate) { // Başlangıç tarihi bitiş tarihinden önce veya aynı günse
+                    var difference = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
+                    var dailyRate = 100; // Günlük ücret 100 TL
+
+                    var totalAmount = 0;
+                    if (difference <= 4) {
+                        totalAmount = 500; // İlk dört gün için ücret 500 TL
+                    } else {
+                        totalAmount = 500 + (difference - 4) * dailyRate; // Diğer günler için ek ücretler
+                    }
+
+                    $("#date-difference").text("Kiralanan Gün Sayısı: " + difference + " gün");
+                    $("#total-amount").text("Toplam Ücret: " + totalAmount + " TL");
+                } else {
+                    $("#date-difference").text("");
+                    $("#total-amount").text("");
+                }
             }
-        }
 
-        // Bitiş tarih seçicisini gizle
-        $("#end-date").hide();
-    });
+            // Bitiş tarih seçicisini gizle
+            $("#end-date").hide();
+        });
 
-    document.getElementById("contactForm").addEventListener("submit",()=> {
-            
+        document.getElementById("contactForm").addEventListener("submit", () => {
+
             // Form gönderildiğinde teşekkür mesajı göster
             setTimeout(() => {
                 alert("Siparişiniz için teşekkür ederiz. Adres bilgileriniz bize ulaştı.");
@@ -308,53 +304,11 @@
                 formpop.style.display = "none"
             }, 500);
         });
-</script>
+    </script>
+<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+<script src="script.js"></script>
 
-<script>
-        const kirala = document.querySelector(".kirala")
-        const formpop = document.querySelector(".form-pop")
-        const formpopc = document.querySelector(".form-pop-container")
-        const xmark = document.querySelector(".xmark")
 
-        kirala.addEventListener("click", () => {
-            formpop.style.display = "flex"
-        })
-        
-        window.addEventListener("click",(e)=>{
-            if (e.target === formpop) {
-               formpop.style.display = "none" 
-            }
-        })
-        xmark.addEventListener("click",(e)=>{
-            
-               formpop.style.display = "none" 
-            
-        })
 
-        
-        
-    const activeImage = document.querySelector(".product-image .active");
-        const productImages = document.querySelectorAll(".image-list img");
-        const navItem = document.querySelector('a.toggle-nav');
-
-        function changeImage(e) {
-            activeImage.src = e.target.src;
-        }
-
-        function toggleNavigation() {
-            this.nextElementSibling.classList.toggle('active');
-        }
-
-        productImages.forEach(image => image.addEventListener("click", changeImage));
-        navItem.addEventListener('click', toggleNavigation);
-    var swiper = new Swiper(".mySwiper", {
-        spaceBetween:10,
-        loop:true,
-        navigation: {
-            nextEl: ".r1-btn",
-            prevEl: ".l1-btn",
-        },
-    });
-</script>
 </body>
 </html>
