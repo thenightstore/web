@@ -33,6 +33,13 @@
     <meta name="theme-color" content="#ffffff">
     <link href="https://fonts.googleapis.com/css2?family=Arimo&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Poppins&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/e2bce648c2.js" crossorigin="hurphygames"></script>
+    <style type="text/css" media="print">
+        /* Yazdırma işlemi sırasında tarih seçici alanları için stil */
+        #start-date,
+        #end-date {
+            display: inline !important;
+        }
+    </style>
 </head>
 <body>
     
@@ -85,7 +92,7 @@
         <div class="overlay"></div>
     </nav>
     <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
-    <div class="form-pop">
+    <div class="form-pop" >
         <div class="form-pop-container">
             <div class="xmark-container">
                 <div class="xmark">
@@ -95,27 +102,33 @@
             <h4 style="margin-bottom: 10px;">Sipariş Bilgileri</h4>
             <form id="contactForm" action="https://formspree.io/f/meqylyol" method="POST" target="dummyframe">
                 
-                <input type="text" id="fname" name="isim" required placeholder="İsim"><br><br>
+                
+
+                <input class="mon" type="text" id="fname" name="isim" required placeholder="İsim"><br><br>
     
            
-                <input type="text" id="lname" name="soyisim" required placeholder="Soyisim"><br><br>
+                <input class="mon" type="text" id="lname" name="soyisim" required placeholder="Soyisim"><br><br>
     
                 
-                <input type="tel" id="phone" name="telefon" pattern="[0-9]{10}" required placeholder="Telefon Numarası"><br>
+                <input class="mon" type="tel" id="phone" name="telefon" pattern="[0-9]{10}" required placeholder="Telefon Numarası"><br>
                 <small>(örn. 5551234567)</small><br><br>
 
                 
-                    <input required type="text" id="start-date" name="start-date" placeholder="Başlangıç Tarihi" autocomplete="none">
-                    <br><br>
-                    <input required type="text" id="end-date" name="end-date" placeholder="Bitiş Tarihi" autocomplete="none">
-                    <br>
-                    <div id="date-difference"></div>
-                    <br>
-                    <div id="total-amount"></div>
+                <input style="padding: 8px;" required type="text" id="start-date" name="start-date" placeholder="Başlangıç Tarihi"
+                    autocomplete="none">
+                <br><br>
+                <input style="padding: 8px;" required type="text" id="end-date" name="end-date" placeholder="Bitiş Tarihi"
+                    autocomplete="none">
+                <br>
+                <div id="date-difference"></div>
+                <br>
+                <div id="total-amount"></div>
+                        
+                   
                 
                 
 
-                <textarea id="address" name="urun1" rows="4" cols="50" required placeholder="Adres"></textarea><br>
+                <textarea class="mon" id="address" name="urun1" rows="4" cols="50" required placeholder="Adres"></textarea><br>
     
                 <button type="submit" class="s-card-btn-buy">KİRALA</button>
             </form>

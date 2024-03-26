@@ -1672,7 +1672,7 @@ img {
     box-shadow: 0 0 10px #00000020;
 }
 
-.form-pop-container input, .form-pop-container textarea{
+.mon{
     padding: 8px;
     width: 100%;
     border-radius: 3px;
