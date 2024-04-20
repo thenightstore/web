@@ -289,10 +289,10 @@
                 var dailyRate = 300; // Günlük ücret 100 TL --300 tl deneme.
 
                 var totalAmount = 0;
-                if (difference <= 4) {
+                if (difference <= 3) {
                     totalAmount = 2000; // İlk dört gün için ücret 500 TL
                 } else {
-                    totalAmount = 2000 + (difference - 4) * dailyRate; // Diğer günler için ek ücretler
+                    totalAmount = 2000 + (difference - 3) * dailyRate; // Diğer günler için ek ücretler
                 }
 
                 $("#date-difference").text("Kiralanan Gün Sayısı: " + difference + " gün");
