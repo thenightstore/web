@@ -36,6 +36,9 @@ for (let i = 0; i < navlink.length; i++) {
 
 const accordionItem = document.querySelectorAll(".accordion-item");
 
+
+
+
 accordionItem.forEach((el) =>
 
     el.addEventListener("click", () => {
@@ -47,3 +50,8 @@ accordionItem.forEach((el) =>
         }
     })
 );
+
+// const imgbutton = document.querySelector(".product-image");
+// imgbutton.addEventListener("click", ()=>{
+//     imgbutton.classList.toggle("scales");
+// })

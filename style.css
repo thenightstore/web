@@ -22,6 +22,7 @@ nav{
     z-index: 999;
     
 }
+
 .nav-container{
     max-width: 100%;
     margin: auto;
@@ -1668,7 +1669,8 @@ img {
     
     padding: 20px;
     background: #fff;
-    
+    overflow: scroll;
+    height: 700px;
     box-shadow: 0 0 10px #00000020;
 }
 
